@@ -1,0 +1,14 @@
+{
+  "name": "friend-zone",
+  "version": "1.0.0",
+  "description": "Friend Zone: web game sosial real-time untuk kumpul bareng (7 game).",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": { "ws": "^8.18.0" }
+}

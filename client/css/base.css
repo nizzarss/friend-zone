@@ -1,0 +1,503 @@
+/* Dasar: token, reset, komponen umum. Tema per game ada di themes.css */
+:root {
+  --bg: #2d1017;
+  --bg2: #170a0e;
+  --glow: #7a1c2b;
+  --ink: #fff0e6;
+  --muted: rgba(255, 240, 230, 0.62);
+  --accent: #d8434f;
+  --accent-ink: #fff;
+  --accent-edge: #a02a36;
+  --panel: rgba(255, 255, 255, 0.07);
+  --panel-2: rgba(255, 255, 255, 0.12);
+  --line: rgba(255, 255, 255, 0.13);
+  --ok: #7fe3c4;
+  --warn: #ffb020;
+  --font-display: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --r: 28px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg2);
+  color-scheme: dark;
+}
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--bg2);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.5s;
+}
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+.ic {
+  display: block;
+  flex: none;
+}
+[hidden] {
+  display: none !important;
+}
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Latar & shell ---------- */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(120% 60% at 50% -8%, var(--glow), transparent 62%), linear-gradient(180deg, var(--bg), var(--bg2));
+  transition: background 0.6s;
+}
+.backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  pointer-events: none;
+  background-image: var(--pattern, none);
+  background-size: var(--pattern-size, auto);
+  mask-image: linear-gradient(180deg, #000, transparent 85%);
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
+}
+.shell {
+  position: relative;
+  z-index: 1;
+  max-width: 440px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  padding: 0 18px;
+}
+.screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) 0 calc(24px + var(--safe-b));
+  animation: screen-in 0.45s var(--ease) both;
+}
+.screen.still {
+  animation: none;
+}
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+.grow {
+  flex: 1;
+}
+
+/* ---------- Tombol ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.35), inset 0 -3px 0 rgba(0, 0, 0, 0.18), 0 14px 28px -12px var(--accent);
+  transition: transform 0.18s var(--spring), filter 0.2s, opacity 0.2s;
+}
+.btn:active {
+  transform: scale(0.96);
+}
+.btn[disabled] {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: saturate(0.6);
+}
+.btn.block {
+  width: 100%;
+}
+.btn .chip {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-right: -14px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.22);
+}
+.btn.with-chip {
+  justify-content: space-between;
+  padding-right: 10px;
+  padding-left: 26px;
+}
+.btn.with-chip .chip {
+  margin-right: 0;
+}
+.btn.ghost {
+  background: var(--panel);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--line);
+}
+.btn.sm {
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 15px;
+}
+.ibtn {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--panel);
+  box-shadow: inset 0 0 0 1.5px var(--line);
+  color: var(--ink);
+  transition: transform 0.18s var(--spring), background 0.2s;
+}
+.ibtn:active {
+  transform: scale(0.9);
+}
+.ibtn.on {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: none;
+}
+.ibtn.sm {
+  width: 38px;
+  height: 38px;
+}
+
+/* ---------- Panel, chip, avatar ---------- */
+.panel {
+  background: var(--panel);
+  border: 1.5px solid var(--line);
+  border-radius: var(--r);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--panel);
+  border: 1.5px solid var(--line);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.pill.sel {
+  background: var(--accent);
+  border-color: transparent;
+  color: var(--accent-ink);
+}
+button.pill {
+  transition: transform 0.15s var(--spring), background 0.2s;
+}
+button.pill:active {
+  transform: scale(0.94);
+}
+.avatar {
+  --sz: 40px;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--sz);
+  height: var(--sz);
+  border-radius: 50%;
+  background: var(--av, #fff);
+  color: #1b1b1b;
+  font-weight: 800;
+  font-size: calc(var(--sz) * 0.42);
+  font-family: var(--font-display);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.14);
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 3px rgba(127, 227, 196, 0.22);
+}
+.dot.off {
+  background: #7d7d7d;
+  box-shadow: none;
+}
+.bar {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--panel-2);
+  overflow: hidden;
+}
+.bar > i {
+  display: block;
+  height: 100%;
+  width: var(--w, 0%);
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 0.6s var(--ease);
+}
+
+/* ---------- Header umum ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+}
+.topbar .title {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Sheet & toast ---------- */
+#layer {
+  position: relative;
+  z-index: 50;
+}
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 3, 5, 0.62);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fade 0.25s both;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+.sheet {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  max-height: 92dvh;
+  overflow: auto;
+  padding: 14px 20px calc(22px + var(--safe-b));
+  border-radius: 34px 34px 0 0;
+  background: linear-gradient(180deg, var(--bg), var(--bg2));
+  border: 1.5px solid var(--line);
+  border-bottom: 0;
+  color: var(--ink);
+  animation: sheet-up 0.4s var(--ease) both;
+}
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+.sheet .grab {
+  width: 44px;
+  height: 5px;
+  border-radius: 9px;
+  background: var(--line);
+  margin: 0 auto 14px;
+}
+.sheet-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(26px + var(--safe-b));
+  transform: translateX(-50%);
+  max-width: min(92vw, 400px);
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: #fff;
+  color: #20120f;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 14px 36px -10px rgba(0, 0, 0, 0.6);
+  animation: toast-in 0.4s var(--spring) both;
+  z-index: 80;
+}
+.toast.warn {
+  background: var(--warn);
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px) scale(0.9);
+  }
+}
+.offline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  display: flex;
+  justify-content: center;
+  padding: calc(8px + env(safe-area-inset-top, 0px)) 12px 8px;
+  background: var(--warn);
+  color: #2a1800;
+  font-weight: 800;
+  font-size: 13px;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ---------- Input ---------- */
+.field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--panel);
+  border: 1.5px solid var(--line);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.field input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-weight: 700;
+  font-size: 17px;
+}
+.field input::placeholder {
+  color: var(--muted);
+  font-weight: 600;
+}
+.field.err {
+  border-color: var(--warn);
+}
+.errline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--warn);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+/* ---------- Efek partikel ---------- */
+.burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+.bp {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--c);
+  border-radius: 50%;
+  opacity: 0;
+  animation: bp 1.3s var(--ease) var(--dl) both;
+}
+.bp-bit {
+  border-radius: 2px;
+  width: 8px;
+  height: 14px;
+}
+.bp-heart {
+  background: none;
+  width: 14px;
+  height: 14px;
+  clip-path: path('M7 13C2 9 0 6.500 0 4.200 0 2 1.600.8 3.300.8 4.800.8 6.200 1.700 7 3 7.800 1.700 9.200.8 10.700.8 12.400.8 14 2 14 4.200 14 6.500 12 9 7 13z');
+  background: var(--c);
+}
+@keyframes bp {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0) scale(0.4);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), calc(var(--dy) + 40px)) rotate(var(--rot)) scale(1);
+  }
+}
+
+/* ---------- Gerak dimatikan ---------- */
+html[data-motion='off'] *,
+html[data-motion='off'] *::before,
+html[data-motion='off'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-motion='auto'] *,
+  html[data-motion='auto'] *::before,
+  html[data-motion='auto'] *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

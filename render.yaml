@@ -1,0 +1,12 @@
+# Deploy satu klik di Render (https://render.com): New > Blueprint > pilih repo ini.
+services:
+  - type: web
+    name: friend-zone
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: TRUST_PROXY
+        value: "1"

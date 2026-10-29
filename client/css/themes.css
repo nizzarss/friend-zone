@@ -1,0 +1,63 @@
+/* Tema per game (PRD 2.4 & 5.2). Berpindah lewat atribut data-theme pada <html>. */
+[data-theme='tod'] {
+  --bg: #1d1709; --bg2: #0d0a05; --glow: #5a3a06; --ink: #fff4d6; --muted: rgba(255, 244, 214, 0.6);
+  --accent: #ffc61a; --accent-ink: #1c1300; --accent-edge: #b88900;
+  --font-display: 'Anton', 'Bricolage Grotesque', sans-serif;
+  --pattern: repeating-linear-gradient(135deg, rgba(255, 198, 26, 0.07) 0 14px, transparent 14px 40px);
+}
+[data-theme='deep'] {
+  --bg: #34264a; --bg2: #1d1628; --glow: #6a549c; --ink: #f6ece0; --muted: rgba(246, 236, 224, 0.62);
+  --accent: #c9b2f0; --accent-ink: #281d3b; --accent-edge: #8d76bd;
+  --font-display: 'Fraunces', Georgia, serif;
+  --pattern: radial-gradient(circle, rgba(255, 255, 255, 0.35) 1px, transparent 1.6px); --pattern-size: 46px 46px;
+}
+[data-theme='kepekaan'] {
+  --bg: #08180f; --bg2: #040907; --glow: #0f5a35; --ink: #d9ffe9; --muted: rgba(217, 255, 233, 0.58);
+  --accent: #3dff9a; --accent-ink: #02160b; --accent-edge: #1fa866; --ok: #3dff9a; --warn: #ffb020;
+  --panel: rgba(61, 255, 154, 0.06); --panel-2: rgba(61, 255, 154, 0.12); --line: rgba(61, 255, 154, 0.2);
+  --font-display: 'Chakra Petch', 'Bricolage Grotesque', sans-serif;
+  --pattern: repeating-radial-gradient(circle at 50% 30%, rgba(61, 255, 154, 0.12) 0 1px, transparent 1px 64px), linear-gradient(rgba(61, 255, 154, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(61, 255, 154, 0.05) 1px, transparent 1px);
+  --pattern-size: auto, 32px 32px, 32px 32px;
+}
+[data-theme='cocok'] {
+  --bg: #7a0f23; --bg2: #350812; --glow: #cf2a46; --ink: #ffe6da; --muted: rgba(255, 230, 218, 0.66);
+  --accent: #ff6b7d; --accent-ink: #34050f; --accent-edge: #c43a4d; --ok: #7fe3c4;
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cpath d='M20 34C12 28 10 24 10 21c0-3 2-5 5-5 2 0 4 1.500 5 3.500 1-2 3-3.500 5-3.500 3 0 5 2 5 5 0 3-2 7-10 13z' fill='%23ff6b7d' fill-opacity='.18'/%3E%3Cpath d='M66 76C60 72 58 69 58 67c0-2 1.500-3.500 3.500-3.500 1.500 0 3 1 4.500 2.500 1-1.500 3-2.500 4.500-2.500 2 0 3.500 1.500 3.500 3.500 0 2-1.500 5-8 9z' fill='%237fe3c4' fill-opacity='.12'/%3E%3C/svg%3E"); --pattern-size: 90px 90px;
+}
+[data-theme='rel'] {
+  --bg: #4e271f; --bg2: #26120f; --glow: #94503c; --ink: #ffe9db; --muted: rgba(255, 233, 219, 0.64);
+  --accent: #f2a58e; --accent-ink: #3a160d; --accent-edge: #c07560;
+  --font-display: 'Young Serif', Georgia, serif;
+  --pattern: radial-gradient(circle at 20% 20%, rgba(255, 217, 168, 0.1) 0 40px, transparent 41px), radial-gradient(circle at 80% 70%, rgba(255, 217, 168, 0.08) 0 60px, transparent 61px); --pattern-size: 220px 220px;
+}
+[data-theme='kenal'] {
+  --bg: #1b4373; --bg2: #0f2239; --glow: #3277c4; --ink: #f2f8ff; --muted: rgba(242, 248, 255, 0.66);
+  --accent: #ffd23f; --accent-ink: #2b2000; --accent-edge: #c79d00;
+  --font-display: 'Gabarito', 'Bricolage Grotesque', sans-serif;
+  --pattern: radial-gradient(circle, rgba(255, 255, 255, 0.28) 1.4px, transparent 2px); --pattern-size: 28px 28px;
+}
+[data-theme='siapa'] {
+  --bg: #5f17cc; --bg2: #260872; --glow: #9446ff; --ink: #f7efff; --muted: rgba(247, 239, 255, 0.68);
+  --accent: #c6ff3d; --accent-ink: #1c2d00; --accent-edge: #8cbf00;
+  --font-display: 'Bowlby One', 'Bricolage Grotesque', sans-serif;
+  --pattern: radial-gradient(circle at 12% 18%, #ff4fb8 0 4px, transparent 5px), radial-gradient(circle at 78% 36%, #c6ff3d 0 3px, transparent 4px), radial-gradient(circle at 44% 82%, #6ee7ff 0 4px, transparent 5px); --pattern-size: 180px 180px;
+}
+
+/* Warna emblem: tetap sama di semua tema supaya katalog konsisten */
+.em-tod { --e1: #ffc61a; --e2: #ff5a1f; --e3: #fff4d6; }
+.em-deep { --e1: #c9b2f0; --e2: #f4e9dc; }
+.em-kepekaan { --e1: #3dff9a; --e2: #ffb020; }
+.em-cocok { --e1: #ff6b7d; --e2: #7fe3c4; }
+.em-rel { --e1: #f2a58e; --e2: #ffd9a8; --e3: #4e271f; }
+.em-kenal { --e1: #ffd23f; --e2: #1b4373; --e3: #fff; }
+.em-siapa { --e1: #c6ff3d; --e2: #ff4fb8; --e3: #ffd23f; }
+
+/* Warna kartu katalog tiap game */
+.tile[data-g='tod'] { --t1: #ffc61a; --t2: #ff5a1f; --ti: #1c1300; }
+.tile[data-g='deep'] { --t1: #6a549c; --t2: #34264a; --ti: #f6ece0; }
+.tile[data-g='kepekaan'] { --t1: #0f5a35; --t2: #06150d; --ti: #d9ffe9; }
+.tile[data-g='cocok'] { --t1: #e0364f; --t2: #7a0f23; --ti: #ffe6da; }
+.tile[data-g='rel'] { --t1: #b3604a; --t2: #4e271f; --ti: #ffe9db; }
+.tile[data-g='kenal'] { --t1: #3a84d6; --t2: #1b4373; --ti: #f2f8ff; }
+.tile[data-g='siapa'] { --t1: #9446ff; --t2: #4a0fb0; --ti: #f7efff; }
